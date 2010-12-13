@@ -18,27 +18,46 @@ function h = plot_ellipse(A, xc, varargin)
     end
             
     if size(A,1) == 3
-        % plot an ellipsoid
-        plot_ellipsoid(inv(A), xc, varargin{:});
-    else
-        % plot an ellipse
+        %% plot an ellipsoid
 
-        if(~any(diag(A)==0))
-            [V,D] = eig(A);
-            
-            % make unit circle
-            th = [0:0.1:2*pi];
-            th = [th 0];
-            y = [cos(th);sin(th)];
-            
-            % warp it into the ellipse
-            x = inv(sqrtm(A))*y;
-            %el = V*sqrtm(D)*y;
-            % offset it
-            x = x + repmat(xc(:), 1, size(x,2));
-            %        el = [el el(:,1)] + repmat(x,1,size(el,2)+1);
-            h = plot(x(1,:), x(2,:), varargin{:} );
-            
+        % define mesh points on the surface of a unit sphere
+        [Xs,Ys,Zs] = sphere();
+        ps = [Xs(:) Ys(:) Zs(:)]';
+
+        % warp it into the ellipsoid
+        pe = sqrtm(A) * ps;
+
+        % offset it to optional non-zero centre point
+        if nargin > 1
+            pe = bsxfun(@plus, xc(:), pe);
         end
+
+        % put back to mesh format
+        Xe = reshape(pe(1,:), size(Xs));
+        Ye = reshape(pe(2,:), size(Ys));
+        Ze = reshape(pe(3,:), size(Zs));
+
+        % plot it
+        h = mesh(Xe, Ye, Ze);
+
+    else
+        %% plot an ellipse
+
+        [V,D] = eig(A);
+        
+        % define points on a unit circle
+        th = linspace(0, 2*pi, 50);
+        pc = [cos(th);sin(th)];
+        
+        % warp it into the ellipse
+        pe = sqrtm(A)*pc;
+
+        % offset it to optional non-zero centre point
+        if nargin > 1
+            pe = bsxfun(@plus, xc(:), pe);
+        end
+
+        % plot it
+        h = plot(pe(1,:), pe(2,:), varargin{:} );
     end
 end
