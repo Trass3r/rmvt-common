@@ -22,6 +22,9 @@ function plot_circle(centre, rad, varargin)
 
     [opt,arglist] = tb_optparse(opt, varargin);
 
+    holdon = ishold;
+    hold on
+
 	n = 50;
 	th = [0:n]'/n*2*pi;
     
@@ -47,3 +50,6 @@ function plot_circle(centre, rad, varargin)
         end
     end
 
+    if holdon == 0
+        hold off
+    end
