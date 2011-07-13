@@ -1,20 +1,22 @@
 %PLOT_SPHERE Plot spheres
 %
-%   h = plot_sphere(c, r, color)
-%   h = plot_sphere(c, r, color, alpha)
+% PLOT_SPHERE(C, R, COLOR) add spheres to the current figure.  C is the 
+% centre of the sphere and if its a 3xN matrix then N spheres are drawn 
+% with centres as per the columns.  R is the radius and COLOR is a Matlab 
+% color spec, either a letter or 3-vector.
 %
-% Adds spheres to the current figure.  c is the centre of the sphere
-% and if its a 3xN matrix then N spheres are drawn with centres as per
-% the columns.  r is the radius and color is a Matlab color spec, either
-% a letter or 3-vector.
+% H = PLOT_SPHERE(C, R, COLOR) as above but returns the handle(s) for the
+% spheres.
 %
-% The optional parameter alpha controls the opacity, 0 is transparant and 1
-% is opaque.  The default is 1.
+% H = PLOT_SPHERE(C, R, COLOR, ALPHA) as above but ALPHA specifies the opacity
+% of the sphere were 0 is transparant and 1 is opaque.  The default is 1.
 %
-% NOTES:
-% The sphere is always added, irrespective of figure hold state.
-% The graphics handle is returned.
-% The number of vertices to draw the sphere is hardwired.
+% NOTES::
+% - The sphere is always added, irrespective of figure hold state.
+% - The number of vertices to draw the sphere is hardwired.
+
+% TODO
+% inconsistant call format compared to other plot_xxx functions.
 
 function h = plot_sphere(c, r, color, alpha)
 

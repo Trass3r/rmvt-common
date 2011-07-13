@@ -1,37 +1,36 @@
 %OPTPARSE Standard option parser for Toolbox functions
 %
-% A generalized option parser for Toolbox functions.  Supports options that
-% have an assigned value, boolean or enumeration types (string or int).
+% [OPTOUT,ARGS] = TB_OPTPARSE(OPT, ARGLIST) is a generalized option parser for
+% Toolbox functions.  It supports options that have an assigned value, boolean 
+% or enumeration types (string or int).
 %
 % The software pattern is:
 %
 %       function(a, b, c, varargin)
-%           opt.foo = true;
-%           opt.bar = false;
-%           opt.blah = [];
-%           opt.choose = {'this', 'that', 'other'};
-%           opt.select = {'#no', '#yes'};
-%
-%           opt = tb_optparse(opt, varargin);
-%             .
-%             .
+%       opt.foo = true;
+%       opt.bar = false;
+%       opt.blah = [];
+%       opt.choose = {'this', 'that', 'other'};
+%       opt.select = {'#no', '#yes'};
+%       opt = tb_optparse(opt, varargin);
 %
 % Optional arguments to the function behave as follows:
-%   'foo'          sets opt.foo <- true
-%   'nobar'        sets opt.foo <- false
-%   'blah', 3      sets opt.blah <- 3
-%   'blah', {x,y}  sets opt.blah <- {x,y}
-%   'that'         sets opt.choose <- 'that'
-%   'yes'          sets opt.select <- 2 (the second element)
+%   'foo'           sets opt.foo <- true
+%   'nobar'         sets opt.foo <- false
+%   'blah', 3       sets opt.blah <- 3
+%   'blah', {x,y}   sets opt.blah <- {x,y}
+%   'that'          sets opt.choose <- 'that'
+%   'yes'           sets opt.select <- 2 (the second element)
 %
 % and can be given in any combination.
 %
-% If none of 'this', 'that' or 'other' are specified then opt.choose <- 'this'
-% If none of 'no' or 'yes' are specified then opt.select <- 1
+% If neither of 'this', 'that' or 'other' are specified then opt.choose <- 'this'.
+% If neither of 'no' or 'yes' are specified then opt.select <- 1.
 %
-% Note that the enumerator names must be distinct from the field names.
-% Note that only one value can be assigned to a field, if multiple values
-% are required they must be converted to a cell array.
+% Note:
+% - that the enumerator names must be distinct from the field names.
+% - that only one value can be assigned to a field, if multiple values
+%    are required they must be converted to a cell array.
 %
 % The allowable options are specified by the names of the fields in the
 % structure opt.  By default if an option is given that is not a field of 

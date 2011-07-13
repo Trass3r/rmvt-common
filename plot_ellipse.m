@@ -1,13 +1,20 @@
-%plot_ellipse Plot an ellipse
+%PLOT_ELLIPSE Draw an ellipse on the current plot
 %
-%   plot_ellipse(A, xc, ls)
+% PLOT_ELLIPSE(A, LS) draws an ellipse defined by X'AX = 0 on the 
+% current plot, centred at the origin, with Matlab line style LS.
 %
-%   ls is the standard line styles.
+% PLOT_ELLIPSE(A, C, LS) as above but centred at C=[X,Y].
+% current plot.  If C=[X,Y,Z] the ellipse is parallel to the XY plane
+% but at height Z.
 
 function h = plot_ellipse(A, xc, varargin)
 
     if size(A,1) ~= size(A,2)
         error('ellipse is defined by a square matrix');
+    end
+
+    if size(A,1) > 3
+        error('can only plot ellipsoid for 2 or 3 dimenions');
     end
     
     if nargin < 2
@@ -16,6 +23,9 @@ function h = plot_ellipse(A, xc, varargin)
     if nargin < 3
         varargin = {};
     end
+    
+    holdon = ishold();
+	hold on
             
     if size(A,1) == 3
         %% plot an ellipsoid
@@ -42,6 +52,9 @@ function h = plot_ellipse(A, xc, varargin)
 
     else
         %% plot an ellipse
+        
+        opt.z = 0;
+        [opt,varargin] = tb_optparse(opt, varargin);
 
         [V,D] = eig(A);
         
@@ -58,6 +71,13 @@ function h = plot_ellipse(A, xc, varargin)
         end
 
         % plot it
-        h = plot(pe(1,:), pe(2,:), varargin{:} );
+        if opt.z == 0
+            h = plot(pe(1,:), pe(2,:), varargin{:} );
+        else
+            h = plot3(pe(1,:), pe(2,:), ones(1,numcols(pe))*opt.z, varargin{:} );
+            
+        end
     end
+    holdon = ishold;
+    hold on
 end

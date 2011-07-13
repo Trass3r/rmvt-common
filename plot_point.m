@@ -1,13 +1,19 @@
 %PLOT_POINT	Mark point features
 %
-%   plot_point(p, options)
+% PLOT_POINT(P, OPTIONS) adds point markers to a plot, where P
+% is 2xN and each column is the point coordinate.
 %
-%  Options:
-%    'textcolor', colspec     Specify color of text
-%    'textsize', size         Specify size of text
-%    'printf', {fmt, data}    Label points according to printf format
-%                              string and corresponding element of data
-%    'sequence'               Label points sequentially
+% Options::
+%  'textcolor', colspec     Specify color of text
+%  'textsize', size         Specify size of text
+%  'bold'                   Text in bold font.
+%  'printf', {fmt, data}    Label points according to printf format
+%                           string and corresponding element of data
+%  'sequence'               Label points sequentially
+%
+% Additional options are passed through to PLOT for creating the marker.
+%
+% See also PLOT, TEXT.
 
 function plot_point(p, varargin)
 
@@ -30,7 +36,7 @@ function plot_point(p, varargin)
         p = [[p.u_]; [p.v_]];
     end
 
-    ish = ishold();
+    holdon = ishold();
 	hold on
 	for i=1:numcols(p)
 		plot(p(1,i), p(2,i), arglist{:});
@@ -43,7 +49,7 @@ function plot_point(p, varargin)
         end
 
 	end
-    if ~ish
+    if ~holdon
         hold off
     end
     figure(gcf)

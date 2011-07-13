@@ -1,8 +1,13 @@
-%PLOTPOLY Plot a polygon
+%PLOT_POLY Plot a polygon
 %
-%   plotpoly(p, args)
+% PLOTPOLY(P, OPTIONS) plot a polygon defined by columns of P which
+% can be 2xN or 3xN.
 %
-% p is 2D or 3D point data, one row per point.
+% OPTIONS::
+%  'fill'    the color of the circle's interior, Matlab color spec
+%  'alpha'   transparency of the filled circle: 0=transparent, 1=solid.
+%
+% See also PLOT, PATCH, Polygon.
 
 % TODO: options for fill, not filled, line style, labels (cell array of strings)
 

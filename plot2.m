@@ -1,3 +1,14 @@
+%PLOT2 Plot trajectories
+%
+% PLOT2(P) plots a line with coordinates taken from successive rows of P.  P
+% can be Nx2 or Nx3.
+%
+% If P has three dimensions, ie. Nx2xM or Nx3xM then the M trajectories are
+% overlaid in the one plot.
+%
+% PLOT2(P, LS) as above but the line style arguments LS are passed to plot.
+%
+% See also plot.
 function h = plot2(p1, varargin)
 
     if ndims(p1) == 2

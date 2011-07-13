@@ -1,4 +1,13 @@
-function h = plot(p1, varargin)
+%PLOTP Plot trajectories
+%
+% PLOTP(P) plots a set of points P, which by Toolbox convention are stored
+% one per column.  P can be Nx2 or Nx3.  By default a linestyle of 'bx'
+% is used.
+%
+% PLOTP(P, LS) as above but the line style arguments LS are passed to plot.
+%
+% See also plot, plot2.
+function h = plotp(p1, varargin)
 
     if length(varargin) == 0
         varargin = {'bx'};

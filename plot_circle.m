@@ -1,3 +1,14 @@
+%PLOT_CIRCLE Draw a circle on the current plot
+%
+% PLOT_CIRCLE(C, R, options) draws a circle on the current plot with 
+% centre C=[X,Y] and radius R.  If C=[X,Y,Z] the circle is drawn in the
+% XY-plane at height Z.
+%
+% Options::
+%  'edgecolor'   the color of the circle's edge, Matlab color spec
+%  'fillcolor'   the color of the circle's interior, Matlab color spec
+%  'alpha'       transparency of the filled circle: 0=transparent, 1=solid.
+
 % Copyright (C) 1995-2009, by Peter I. Corke
 %
 % This file is part of The Machine Vision Toolbox for Matlab (MVTB).
@@ -30,6 +41,9 @@ function plot_circle(centre, rad, varargin)
     
     if length(rad) == 1
         rad = rad*ones(numcols(centre),1);
+    end
+    if length(centre) == 2 || length(centre) == 3
+        centre = centre(:);
     end
 
     for i=1:numcols(centre)

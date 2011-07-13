@@ -1,19 +1,16 @@
-% Copyright (C) 1995-2009, by Peter I. Corke
+%CIRCLE Compute points on a circle
 %
-% This file is part of The Machine Vision Toolbox for Matlab (MVTB).
-% 
-% MVTB is free software: you can redistribute it and/or modify
-% it under the terms of the GNU Lesser General Public License as published by
-% the Free Software Foundation, either version 3 of the License, or
-% (at your option) any later version.
-% 
-% MVTB is distributed in the hope that it will be useful,
-% but WITHOUT ANY WARRANTY; without even the implied warranty of
-% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-% GNU Lesser General Public License for more details.
-% 
-% You should have received a copy of the GNU Leser General Public License
-% along with MVTB.  If not, see <http://www.gnu.org/licenses/>.
+% CIRCLE(C, R, OPT) plot a circle centred at C with radius R.
+%
+% X = CIRCLE(C, R, OPT) return an Nx2 matrix whose rows define the 
+% coordinates [x,y] of points around the circumferance of a circle 
+% centred at C and of radius R.
+%
+% C is normally 2x1 but if 3x1 then the circle is embedded in 3D, and X is Nx3,
+% but the circle is always in the xy-plane with a z-coordinate of C(3).
+%
+% Options::
+%  'n',N   Specify the number of points (default 50)
 function out = circle(centre, rad, varargin)
 
 	opt.n = 50;
